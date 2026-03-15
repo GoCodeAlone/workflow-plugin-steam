@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"net/url"
+	"strconv"
 
 	sdk "github.com/GoCodeAlone/workflow/plugin/external/sdk"
 )
@@ -70,6 +71,7 @@ func (s *steamPresenceSetStep) Execute(_ context.Context, _ map[string]any,
 //	apiKey       string (required)
 //	steamId      string (required)
 //	relationship string — "friend" (default), "all"
+//	appId        string — optional; when set, only friends who own this app are returned
 //	baseUrl      string — override Steam API base URL (for testing)
 //
 // Outputs: friends ([]map), count (int)
@@ -97,6 +99,7 @@ func (s *steamFriendsListStep) Execute(_ context.Context, _ map[string]any,
 	if relationship == "" {
 		relationship = "friend"
 	}
+	appId, _ := merged["appId"].(string)
 	baseURL, _ := merged["baseUrl"].(string)
 
 	client := newSteamClient(baseURL)
@@ -120,10 +123,58 @@ func (s *steamFriendsListStep) Execute(_ context.Context, _ map[string]any,
 		}
 	}
 
+	// If appId is provided, filter friends to those who own the specified app.
+	if appId != "" {
+		friends = filterFriendsByOwnership(client, apiKey, appId, friends)
+	}
+
 	return &sdk.StepResult{Output: map[string]any{
 		"friends": friends,
 		"count":   len(friends),
 	}}, nil
+}
+
+// filterFriendsByOwnership returns only the friends who own the given appId.
+// Calls IPlayerService/GetOwnedGames/v1/ per friend with appids_filter to minimise
+// the data returned; friends with a non-empty game list own the app.
+func filterFriendsByOwnership(client *steamClient, apiKey, appId string, friends []any) []any {
+	appIdInt, err := strconv.Atoi(appId)
+	if err != nil {
+		// Non-numeric appId — cannot filter, return all.
+		return friends
+	}
+
+	filtered := make([]any, 0, len(friends))
+	for _, f := range friends {
+		fm, ok := f.(map[string]any)
+		if !ok {
+			continue
+		}
+		fid, _ := fm["steamid"].(string)
+		if fid == "" {
+			continue
+		}
+		params := url.Values{
+			"key":              {apiKey},
+			"steamid":          {fid},
+			"appids_filter[0]": {strconv.Itoa(appIdInt)},
+			"include_appinfo":  {"0"},
+		}
+		resp, err := client.get("/IPlayerService/GetOwnedGames/v1/", params)
+		if err != nil {
+			// On error (e.g. private profile), skip this friend.
+			continue
+		}
+		response, _ := resp["response"].(map[string]any)
+		if response == nil {
+			continue
+		}
+		games, _ := response["games"].([]any)
+		if len(games) > 0 {
+			filtered = append(filtered, f)
+		}
+	}
+	return filtered
 }
 
 // step.steam_invite_send — generates a Steam join-game invite for a lobby.
@@ -134,6 +185,7 @@ func (s *steamFriendsListStep) Execute(_ context.Context, _ map[string]any,
 //
 // Inputs (current or config):
 //
+//	appId    string (required) — Steam application ID
 //	steamId  string (required) — inviting player's Steam ID
 //	lobbyId  string (required) — Steam lobby ID to join
 //	message  string            — optional custom message
@@ -151,6 +203,10 @@ func (s *steamInviteSendStep) Execute(_ context.Context, _ map[string]any,
 
 	merged := mergeConfigs(current, config)
 
+	appId, _ := merged["appId"].(string)
+	if appId == "" {
+		return nil, fmt.Errorf("step %s: appId is required", s.name)
+	}
 	steamId, _ := merged["steamId"].(string)
 	if steamId == "" {
 		return nil, fmt.Errorf("step %s: steamId is required", s.name)
@@ -161,12 +217,8 @@ func (s *steamInviteSendStep) Execute(_ context.Context, _ map[string]any,
 	}
 	message, _ := merged["message"].(string)
 
-	// steam:// invite URL format for joining a Steam lobby.
-	inviteURL := fmt.Sprintf("steam://joinlobby/%s/%s/%s",
-		merged["appId"], lobbyId, steamId)
-	if appId, _ := merged["appId"].(string); appId == "" {
-		inviteURL = fmt.Sprintf("steam://joinlobby/%s/%s", lobbyId, steamId)
-	}
+	// steam:// invite URL format: steam://joinlobby/{appId}/{lobbyId}/{steamId}
+	inviteURL := fmt.Sprintf("steam://joinlobby/%s/%s/%s", appId, lobbyId, steamId)
 
 	return &sdk.StepResult{Output: map[string]any{
 		"inviteUrl": inviteURL,
