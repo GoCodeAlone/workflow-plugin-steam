@@ -1,0 +1,17 @@
+{
+  "name": "workflow-plugin-steam",
+  "version": "0.1.0",
+  "author": "GoCodeAlone",
+  "description": "Steam platform integration for workflow engine: auth, achievements, leaderboards, rich presence, and friends",
+  "license": "Apache-2.0",
+  "stepTypes": [
+    "step.steam_auth",
+    "step.steam_achievement_set",
+    "step.steam_achievement_sync",
+    "step.steam_stat_set",
+    "step.steam_leaderboard_push",
+    "step.steam_presence_set",
+    "step.steam_friends_list",
+    "step.steam_invite_send"
+  ]
+}
