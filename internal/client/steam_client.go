@@ -1,4 +1,5 @@
-package internal
+// Package client provides the Steam Web API HTTP client used by all step implementations.
+package client
 
 import (
 	"encoding/json"
@@ -9,41 +10,28 @@ import (
 	"time"
 )
 
-const defaultSteamAPIBase = "https://api.steampowered.com"
+const DefaultSteamAPIBase = "https://api.steampowered.com"
 
-// steamClient wraps the Steam Web API with a configurable base URL so
+// SteamClient wraps the Steam Web API with a configurable base URL so
 // tests can substitute an httptest.Server.
-type steamClient struct {
+type SteamClient struct {
 	baseURL    string
 	httpClient *http.Client
 }
 
-// NewSteamClient creates a new steamClient. Exported for use by sub-packages.
-func NewSteamClient(baseURL string) *steamClient {
-	return newSteamClient(baseURL)
-}
-
-func newSteamClient(baseURL string) *steamClient {
+// New creates a new SteamClient. If baseURL is empty, the default Steam API base is used.
+func New(baseURL string) *SteamClient {
 	if baseURL == "" {
-		baseURL = defaultSteamAPIBase
+		baseURL = DefaultSteamAPIBase
 	}
-	return &steamClient{
+	return &SteamClient{
 		baseURL:    baseURL,
 		httpClient: &http.Client{Timeout: 10 * time.Second},
 	}
 }
 
-// Get performs an HTTP GET to the Steam API. Exported for use by sub-packages.
-func (c *steamClient) Get(path string, params url.Values) (map[string]any, error) {
-	return c.get(path, params)
-}
-
-// Post performs an HTTP POST to the Steam API. Exported for use by sub-packages.
-func (c *steamClient) Post(path string, params url.Values) (map[string]any, error) {
-	return c.post(path, params)
-}
-
-func (c *steamClient) get(path string, params url.Values) (map[string]any, error) {
+// Get performs an HTTP GET to the Steam API.
+func (c *SteamClient) Get(path string, params url.Values) (map[string]any, error) {
 	u := c.baseURL + path + "?" + params.Encode()
 	resp, err := c.httpClient.Get(u)
 	if err != nil {
@@ -64,7 +52,8 @@ func (c *steamClient) get(path string, params url.Values) (map[string]any, error
 	return result, nil
 }
 
-func (c *steamClient) post(path string, params url.Values) (map[string]any, error) {
+// Post performs an HTTP POST to the Steam API.
+func (c *SteamClient) Post(path string, params url.Values) (map[string]any, error) {
 	resp, err := c.httpClient.PostForm(c.baseURL+path, params)
 	if err != nil {
 		return nil, fmt.Errorf("steam API POST %s: %w", path, err)

@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	sdk "github.com/GoCodeAlone/workflow/plugin/external/sdk"
+	"github.com/GoCodeAlone/workflow-plugin-steam/internal/steps"
 )
 
 // steamPlugin implements sdk.PluginProvider.
@@ -42,6 +43,19 @@ func (p *steamPlugin) StepTypes() []string {
 		"step.steam_presence_set",
 		"step.steam_friends_list",
 		"step.steam_invite_send",
+
+		// Workshop
+		"step.steam_workshop_publish",
+		"step.steam_workshop_query",
+		"step.steam_workshop_vote",
+		"step.steam_workshop_download",
+		"step.steam_workshop_unsubscribe",
+		"step.steam_workshop_report",
+		"step.steam_workshop_takedown",
+		"step.steam_workshop_check_update",
+		"step.steam_workshop_collection_query",
+		"step.steam_workshop_validate",
+		"step.steam_workshop_modcheck",
 	}
 }
 
@@ -67,6 +81,31 @@ func (p *steamPlugin) CreateStep(typeName, name string, _ map[string]any) (sdk.S
 		return newSteamFriendsListStep(name), nil
 	case "step.steam_invite_send":
 		return newSteamInviteSendStep(name), nil
+
+	// Workshop steps
+	case "step.steam_workshop_publish":
+		return steps.NewWorkshopPublishStep(name), nil
+	case "step.steam_workshop_query":
+		return steps.NewWorkshopQueryStep(name), nil
+	case "step.steam_workshop_vote":
+		return steps.NewWorkshopVoteStep(name), nil
+	case "step.steam_workshop_download":
+		return steps.NewWorkshopDownloadStep(name), nil
+	case "step.steam_workshop_unsubscribe":
+		return steps.NewWorkshopUnsubscribeStep(name), nil
+	case "step.steam_workshop_report":
+		return steps.NewWorkshopReportStep(name), nil
+	case "step.steam_workshop_takedown":
+		return steps.NewWorkshopTakedownStep(name), nil
+	case "step.steam_workshop_check_update":
+		return steps.NewWorkshopCheckUpdateStep(name), nil
+	case "step.steam_workshop_collection_query":
+		return steps.NewWorkshopCollectionQueryStep(name), nil
+	case "step.steam_workshop_validate":
+		return steps.NewWorkshopValidateStep(name), nil
+	case "step.steam_workshop_modcheck":
+		return steps.NewWorkshopModCheckStep(name), nil
+
 	default:
 		return nil, fmt.Errorf("unknown step type %q", typeName)
 	}
