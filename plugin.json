@@ -3,26 +3,53 @@
   "version": "0.2.0",
   "author": "GoCodeAlone",
   "description": "Steam platform integration: auth, achievements, leaderboards, rich presence, friends, and Workshop",
-  "license": "Apache-2.0",
-  "stepTypes": [
-    "step.steam_auth",
-    "step.steam_achievement_set",
-    "step.steam_achievement_sync",
-    "step.steam_stat_set",
-    "step.steam_leaderboard_push",
-    "step.steam_presence_set",
-    "step.steam_friends_list",
-    "step.steam_invite_send",
-    "step.steam_workshop_publish",
-    "step.steam_workshop_query",
-    "step.steam_workshop_vote",
-    "step.steam_workshop_download",
-    "step.steam_workshop_unsubscribe",
-    "step.steam_workshop_report",
-    "step.steam_workshop_takedown",
-    "step.steam_workshop_check_update",
-    "step.steam_workshop_collection_query",
-    "step.steam_workshop_validate",
-    "step.steam_workshop_modcheck"
+  "type": "external",
+  "tier": "community",
+  "license": "MIT",
+  "repository": "https://github.com/GoCodeAlone/workflow-plugin-steam",
+  "capabilities": {
+    "stepTypes": [
+      "step.steam_auth",
+      "step.steam_achievement_set",
+      "step.steam_achievement_sync",
+      "step.steam_stat_set",
+      "step.steam_leaderboard_push",
+      "step.steam_presence_set",
+      "step.steam_friends_list",
+      "step.steam_invite_send",
+      "step.steam_workshop_publish",
+      "step.steam_workshop_query",
+      "step.steam_workshop_vote",
+      "step.steam_workshop_download",
+      "step.steam_workshop_unsubscribe",
+      "step.steam_workshop_report",
+      "step.steam_workshop_takedown",
+      "step.steam_workshop_check_update",
+      "step.steam_workshop_collection_query",
+      "step.steam_workshop_validate",
+      "step.steam_workshop_modcheck"
+    ]
+  },
+  "downloads": [
+    {
+      "os": "linux",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.2.0/workflow-plugin-steam-linux-amd64.tar.gz"
+    },
+    {
+      "os": "linux",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.2.0/workflow-plugin-steam-linux-arm64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "amd64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.2.0/workflow-plugin-steam-darwin-amd64.tar.gz"
+    },
+    {
+      "os": "darwin",
+      "arch": "arm64",
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.2.0/workflow-plugin-steam-darwin-arm64.tar.gz"
+    }
   ]
 }

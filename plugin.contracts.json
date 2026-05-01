@@ -1,0 +1,157 @@
+{
+  "version": "1",
+  "contracts": [
+    {
+      "kind": "step",
+      "type": "step.steam_auth",
+      "mode": "strict",
+      "config": "steam.v1.SteamAuthConfig",
+      "input": "steam.v1.SteamAuthInput",
+      "output": "steam.v1.SteamAuthOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_achievement_set",
+      "mode": "strict",
+      "config": "steam.v1.SteamAchievementSetConfig",
+      "input": "steam.v1.SteamAchievementSetInput",
+      "output": "steam.v1.SteamAchievementSetOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_achievement_sync",
+      "mode": "strict",
+      "config": "steam.v1.SteamAchievementSyncConfig",
+      "input": "steam.v1.SteamAchievementSyncInput",
+      "output": "steam.v1.SteamAchievementSyncOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_stat_set",
+      "mode": "strict",
+      "config": "steam.v1.SteamStatSetConfig",
+      "input": "steam.v1.SteamStatSetInput",
+      "output": "steam.v1.SteamStatSetOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_leaderboard_push",
+      "mode": "strict",
+      "config": "steam.v1.SteamLeaderboardPushConfig",
+      "input": "steam.v1.SteamLeaderboardPushInput",
+      "output": "steam.v1.SteamLeaderboardPushOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_presence_set",
+      "mode": "strict",
+      "config": "steam.v1.SteamPresenceSetConfig",
+      "input": "steam.v1.SteamPresenceSetInput",
+      "output": "steam.v1.SteamPresenceSetOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_friends_list",
+      "mode": "strict",
+      "config": "steam.v1.SteamFriendsListConfig",
+      "input": "steam.v1.SteamFriendsListInput",
+      "output": "steam.v1.SteamFriendsListOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_invite_send",
+      "mode": "strict",
+      "config": "steam.v1.SteamInviteSendConfig",
+      "input": "steam.v1.SteamInviteSendInput",
+      "output": "steam.v1.SteamInviteSendOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_workshop_publish",
+      "mode": "strict",
+      "config": "steam.v1.SteamWorkshopPublishConfig",
+      "input": "steam.v1.SteamWorkshopPublishInput",
+      "output": "steam.v1.SteamWorkshopPublishOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_workshop_query",
+      "mode": "strict",
+      "config": "steam.v1.SteamWorkshopQueryConfig",
+      "input": "steam.v1.SteamWorkshopQueryInput",
+      "output": "steam.v1.SteamWorkshopQueryOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_workshop_vote",
+      "mode": "strict",
+      "config": "steam.v1.SteamWorkshopVoteConfig",
+      "input": "steam.v1.SteamWorkshopVoteInput",
+      "output": "steam.v1.SteamWorkshopVoteOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_workshop_download",
+      "mode": "strict",
+      "config": "steam.v1.SteamWorkshopDownloadConfig",
+      "input": "steam.v1.SteamWorkshopDownloadInput",
+      "output": "steam.v1.SteamWorkshopDownloadOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_workshop_unsubscribe",
+      "mode": "strict",
+      "config": "steam.v1.SteamWorkshopUnsubscribeConfig",
+      "input": "steam.v1.SteamWorkshopUnsubscribeInput",
+      "output": "steam.v1.SteamWorkshopUnsubscribeOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_workshop_report",
+      "mode": "strict",
+      "config": "steam.v1.SteamWorkshopReportConfig",
+      "input": "steam.v1.SteamWorkshopReportInput",
+      "output": "steam.v1.SteamWorkshopReportOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_workshop_takedown",
+      "mode": "strict",
+      "config": "steam.v1.SteamWorkshopTakedownConfig",
+      "input": "steam.v1.SteamWorkshopTakedownInput",
+      "output": "steam.v1.SteamWorkshopTakedownOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_workshop_check_update",
+      "mode": "strict",
+      "config": "steam.v1.SteamWorkshopCheckUpdateConfig",
+      "input": "steam.v1.SteamWorkshopCheckUpdateInput",
+      "output": "steam.v1.SteamWorkshopCheckUpdateOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_workshop_collection_query",
+      "mode": "strict",
+      "config": "steam.v1.SteamWorkshopCollectionQueryConfig",
+      "input": "steam.v1.SteamWorkshopCollectionQueryInput",
+      "output": "steam.v1.SteamWorkshopCollectionQueryOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_workshop_validate",
+      "mode": "strict",
+      "config": "steam.v1.SteamWorkshopValidateConfig",
+      "input": "steam.v1.SteamWorkshopValidateInput",
+      "output": "steam.v1.SteamWorkshopValidateOutput"
+    },
+    {
+      "kind": "step",
+      "type": "step.steam_workshop_modcheck",
+      "mode": "strict",
+      "config": "steam.v1.SteamWorkshopModCheckConfig",
+      "input": "steam.v1.SteamWorkshopModCheckInput",
+      "output": "steam.v1.SteamWorkshopModCheckOutput"
+    }
+  ]
+}
