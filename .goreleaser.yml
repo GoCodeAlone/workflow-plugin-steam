@@ -5,6 +5,7 @@ before:
     - go mod tidy
     - "cp plugin.json plugin.json.orig"
     - "sed -i.bak 's/\"version\": \".*\"/\"version\": \"{{ .Version }}\"/' plugin.json && rm -f plugin.json.bak"
+    - "sed -i.bak 's|releases/download/v[^/]*/|releases/download/v{{ .Version }}/|g' plugin.json && rm -f plugin.json.bak"
 
 after:
   hooks:
