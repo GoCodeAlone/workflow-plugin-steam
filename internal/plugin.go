@@ -3,9 +3,12 @@ package internal
 import (
 	"fmt"
 
-	sdk "github.com/GoCodeAlone/workflow/plugin/external/sdk"
 	"github.com/GoCodeAlone/workflow-plugin-steam/internal/steps"
+	sdk "github.com/GoCodeAlone/workflow/plugin/external/sdk"
 )
+
+// Version is set by GoReleaser at build time.
+var Version = "0.2.0"
 
 // steamPlugin implements sdk.PluginProvider.
 type steamPlugin struct{}
@@ -18,7 +21,7 @@ func NewSteamPlugin() sdk.PluginProvider {
 func (p *steamPlugin) Manifest() sdk.PluginManifest {
 	return sdk.PluginManifest{
 		Name:        "workflow-plugin-steam",
-		Version:     "0.1.0",
+		Version:     Version,
 		Author:      "GoCodeAlone",
 		Description: "Steam platform integration for workflow engine: auth, achievements, leaderboards, rich presence, and friends",
 	}

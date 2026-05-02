@@ -2,9 +2,10 @@ version: 2
 
 before:
   hooks:
-    - go mod tidy
     - "cp plugin.json plugin.json.orig"
     - "sed -i.bak 's/\"version\": \".*\"/\"version\": \"{{ .Version }}\"/' plugin.json && rm -f plugin.json.bak"
+    - "sed -i.bak 's|releases/download/v[^/]*/|releases/download/v{{ .Version }}/|g' plugin.json && rm -f plugin.json.bak"
+    - "go run github.com/GoCodeAlone/workflow/cmd/wfctl@v0.20.1 plugin validate --file plugin.json --strict-contracts"
 
 after:
   hooks:
@@ -24,13 +25,14 @@ builds:
       - amd64
       - arm64
     ldflags:
-      - -s -w -X main.version={{.Version}}
+      - -s -w -X github.com/GoCodeAlone/workflow-plugin-steam/internal.Version={{.Version}}
 
 archives:
   - formats: [tar.gz]
     name_template: "{{ .ProjectName }}-{{ .Os }}-{{ .Arch }}"
     files:
       - plugin.json
+      - plugin.contracts.json
       - LICENSE
 
 checksum:
