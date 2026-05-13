@@ -1,11 +1,12 @@
 {
   "name": "workflow-plugin-steam",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "GoCodeAlone",
   "description": "Steam platform integration: auth, achievements, leaderboards, rich presence, friends, and Workshop",
   "type": "external",
   "tier": "community",
   "license": "MIT",
+  "minEngineVersion": "0.51.7",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-steam",
   "capabilities": {
     "stepTypes": [
