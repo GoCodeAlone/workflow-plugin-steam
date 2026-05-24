@@ -56,8 +56,15 @@ jobs:
             exit 0
           fi
           "${{ runner.temp }}/wfctl-bin/wfctl" plugin verify-capabilities --binary "$BIN" .
+      - name: Publish GitHub release
+        if: success()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release edit "${{ github.ref_name }}" --draft=false --repo "${{ github.repository }}"
+
       - name: Update registry manifest
         if: success()
+        continue-on-error: true
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
           PLUGIN_NAME="${GITHUB_REPOSITORY##*/}"
