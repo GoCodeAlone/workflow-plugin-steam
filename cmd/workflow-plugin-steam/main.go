@@ -11,5 +11,5 @@ import (
 )
 
 func main() {
-	sdk.Serve(internal.NewSteamPlugin())
+	sdk.Serve(internal.NewSteamPlugin(), sdk.WithBuildVersion(sdk.ResolveBuildVersion(internal.Version)))
 }

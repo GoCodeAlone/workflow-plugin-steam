@@ -8,7 +8,7 @@ import (
 )
 
 // Version is set by GoReleaser at build time.
-var Version = "0.2.0"
+var Version = "0.0.0"
 
 // steamPlugin implements sdk.PluginProvider.
 type steamPlugin struct{}
