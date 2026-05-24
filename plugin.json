@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-steam",
-  "version": "0.3.2",
+  "version": "0.3.4",
   "author": "GoCodeAlone",
   "description": "Steam platform integration: auth, achievements, leaderboards, rich presence, friends, and Workshop",
   "type": "external",
@@ -9,6 +9,8 @@
   "minEngineVersion": "0.51.7",
   "repository": "https://github.com/GoCodeAlone/workflow-plugin-steam",
   "capabilities": {
+    "configProvider": false,
+    "moduleTypes": [],
     "stepTypes": [
       "step.steam_auth",
       "step.steam_achievement_set",
@@ -29,28 +31,29 @@
       "step.steam_workshop_collection_query",
       "step.steam_workshop_validate",
       "step.steam_workshop_modcheck"
-    ]
+    ],
+    "triggerTypes": []
   },
   "downloads": [
     {
       "os": "linux",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.2.0/workflow-plugin-steam-linux-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.3.4/workflow-plugin-steam-linux-amd64.tar.gz"
     },
     {
       "os": "linux",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.2.0/workflow-plugin-steam-linux-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.3.4/workflow-plugin-steam-linux-arm64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "amd64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.2.0/workflow-plugin-steam-darwin-amd64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.3.4/workflow-plugin-steam-darwin-amd64.tar.gz"
     },
     {
       "os": "darwin",
       "arch": "arm64",
-      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.2.0/workflow-plugin-steam-darwin-arm64.tar.gz"
+      "url": "https://github.com/GoCodeAlone/workflow-plugin-steam/releases/download/v0.3.4/workflow-plugin-steam-darwin-arm64.tar.gz"
     }
   ]
 }
