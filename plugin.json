@@ -1,6 +1,6 @@
 {
   "name": "workflow-plugin-steam",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "author": "GoCodeAlone",
   "description": "Steam platform integration: auth, achievements, leaderboards, rich presence, friends, and Workshop",
   "type": "external",
